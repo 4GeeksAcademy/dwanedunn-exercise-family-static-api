@@ -37,6 +37,10 @@ class FamilyStructure:
     def delete_member(self, id):
         ## You have to implement this method
         ## Loop the list and delete the member with the given id
+        for member in self._members:
+            if member["id"] == id:
+                self._members.remove(member)
+                return True
         pass
 
     def get_member(self, id):
