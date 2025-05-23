@@ -27,6 +27,8 @@ class FamilyStructure:
 
     def add_member(self, member):
         ## You have to implement this method
+        # def __init__(self):
+            
         ## Append the member to the list of _members
         pass
 
