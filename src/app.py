@@ -38,6 +38,37 @@ def Get_All_Family_Members():
                      "family": members}
     return jsonify(response_body), 200
 
+#retrieve one family member by id
+@app.route('/members/<int:member_id>', methods=['GET'])
+def Get_Family_Member(member_id): 
+    # This is how you can use the Family datastructure by calling its methods
+    member = jackson_family.get_member(member_id)
+    if member:
+        return jsonify(member), 200
+    else:
+        return jsonify({"msg": "Member not found"}), 404
+    
+#Add a new family member
+@app.route('/members', methods=['POST'])
+def Add_Family_Member():
+    # This is how you can use the Family datastructure by calling its methods
+    body = request.get_json()
+    if not body:
+        return jsonify({"msg": "No data provided"}), 400
+    if 'first_name' not in body or 'age' not in body or 'lucky_numbers' not in body:
+        return jsonify({"msg": "Missing required fields"}), 400
+    member = jackson_family.add_member(body)
+    return jsonify(member), 200
+
+# Delete a family member by id
+@app.route('/members/<int:member_id>', methods=['DELETE'])
+def Delete_Family_Member(member_id):
+    # This is how you can use the Family datastructure by calling its methods
+    member = jackson_family.delete_member(member_id)
+    if member:
+        return jsonify({"msg": "Member deleted"}), 200
+    else:
+        return jsonify({"msg": "Member not found"}), 404
 
 
 # This only runs if `$ python src/app.py` is executed
