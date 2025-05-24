@@ -14,6 +14,7 @@ app.url_map.strict_slashes = False
 CORS(app)
 
 # Create the jackson family object
+
 jackson_family = FamilyStructure("Jackson")
 
 
@@ -30,10 +31,10 @@ def sitemap():
 
 
 @app.route('/members', methods=['GET'])
-def handle_hello():
+def Get_All_Family_Members():
     # This is how you can use the Family datastructure by calling its methods
     members = jackson_family.get_all_members()
-    response_body = {"hello": "world",
+    response_body = {"jackson": "Family",
                      "family": members}
     return jsonify(response_body), 200
 
